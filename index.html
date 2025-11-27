@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五子棋游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>五子棋游戏</h1>
+
+        <div class="game-info">
+            <div class="current-player">
+                当前玩家: <span id="current-player">黑子</span>
+            </div>
+            <div class="game-status" id="game-status">游戏进行中</div>
+        </div>
+
+        <div class="game-board" id="game-board">
+            <!-- 棋盘将通过JavaScript生成 -->
+        </div>
+
+        <div class="controls">
+            <button id="undo-btn" disabled>↶ 悔棋</button>
+            <button id="restart-btn">重新开始</button>
+            <div class="undo-info" id="undo-info">可悔棋步数: 0</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

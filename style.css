@@ -1,0 +1,197 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.current-player {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.game-status {
+    font-size: 1.1em;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(15, 35px);
+    grid-template-rows: repeat(15, 35px);
+    gap: 0;
+    background-color: #daa520;
+    padding: 10px;
+    border-radius: 8px;
+    border: 3px solid #8b4513;
+    margin: 0 auto 20px;
+    width: fit-content;
+}
+
+.cell {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #8b4513;
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.cell:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.cell.disabled {
+    cursor: not-allowed;
+}
+
+.cell.disabled:hover {
+    background-color: transparent;
+}
+
+.piece {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid #333;
+}
+
+.piece.black {
+    background-color: #1a1a1a;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.piece.white {
+    background-color: #ffffff;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+#undo-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+#undo-btn:hover:not(:disabled) {
+    background-color: #c0392b;
+}
+
+#undo-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+#restart-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#restart-btn:hover {
+    background-color: #2980b9;
+}
+
+#restart-btn:active {
+    transform: scale(0.98);
+}
+
+.undo-info {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #7f8c8d;
+}
+
+.winner-message {
+    color: #e74c3c;
+    font-size: 1.3em;
+    font-weight: bold;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .game-board {
+        grid-template-columns: repeat(15, 25px);
+        grid-template-rows: repeat(15, 25px);
+        padding: 5px;
+    }
+
+    .cell {
+        width: 25px;
+        height: 25px;
+    }
+
+    .piece {
+        width: 20px;
+        height: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
