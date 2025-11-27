@@ -161,22 +161,22 @@ class Gomoku {
         const gameStatusElement = document.getElementById('game-status');
 
         if (!this.gameOver) {
-            currentPlayerElement.textContent = this.currentPlayer === 1 ? '黑子' : '白子';
-            gameStatusElement.textContent = '游戏进行中';
-            gameStatusElement.className = 'game-status';
+            currentPlayerElement.textContent = this.currentPlayer === 1 ? 'PLAYER_01' : 'PLAYER_02';
+            gameStatusElement.textContent = 'SYSTEM_ACTIVE';
+            gameStatusElement.className = 'output status';
         }
     }
 
     showWinner(winner) {
         const gameStatusElement = document.getElementById('game-status');
-        gameStatusElement.textContent = `${winner} 获胜！`;
-        gameStatusElement.className = 'game-status winner-message';
+        gameStatusElement.textContent = `${winner}_DOMINATES`;
+        gameStatusElement.className = 'output winner-message';
     }
 
     showDraw() {
         const gameStatusElement = document.getElementById('game-status');
-        gameStatusElement.textContent = '平局！';
-        gameStatusElement.className = 'game-status winner-message';
+        gameStatusElement.textContent = 'SYSTEM_DEADLOCK';
+        gameStatusElement.className = 'output winner-message';
     }
 
     // 记录历史
@@ -207,7 +207,7 @@ class Gomoku {
         }
 
         if (undoInfo) {
-            undoInfo.textContent = `可悔棋步数: ${this.moveHistory.length}`;
+            undoInfo.textContent = `MOVES_AVAILABLE: ${this.moveHistory.length}`;
         }
     }
 

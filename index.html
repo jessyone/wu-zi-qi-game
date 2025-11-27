@@ -3,28 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>五子棋游戏</title>
+    <title>HACKER_GOMOKU_v1.0</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <h1>五子棋游戏</h1>
-
-        <div class="game-info">
-            <div class="current-player">
-                当前玩家: <span id="current-player">黑子</span>
+<body class="hacker-terminal">
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-btn close"></div>
+                <div class="terminal-btn minimize"></div>
+                <div class="terminal-btn maximize"></div>
             </div>
-            <div class="game-status" id="game-status">游戏进行中</div>
+            <div class="terminal-title">root@hacker-gomoku:~#</div>
         </div>
 
-        <div class="game-board" id="game-board">
-            <!-- 棋盘将通过JavaScript生成 -->
-        </div>
+        <div class="terminal-content">
+            <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="command">./gomoku --init</span>
+            </div>
 
-        <div class="controls">
-            <button id="undo-btn" disabled>↶ 悔棋</button>
-            <button id="restart-btn">重新开始</button>
-            <div class="undo-info" id="undo-info">可悔棋步数: 0</div>
+            <div class="container">
+                <div class="game-title">
+                    <h1>
+                        <span class="hack-bracket">&lt;</span>
+                        HACKER_GOMOKU_v1.0
+                        <span class="hack-bracket">/&gt;</span>
+                    </h1>
+                    <div class="subtitle">STRATEGIC_WARFARE_SIMULATOR</div>
+                </div>
+
+                <div class="game-info">
+                    <div class="info-panel">
+                        <div class="terminal-line">
+                            <span class="prompt">$</span>
+                            <span class="command">whoami:</span>
+                            <span class="output" id="current-player">PLAYER_01</span>
+                        </div>
+                    </div>
+
+                    <div class="status-panel">
+                        <div class="terminal-line">
+                            <span class="prompt">$</span>
+                            <span class="command">status:</span>
+                            <span class="output status" id="game-status">SYSTEM_ACTIVE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="matrix-container">
+                    <div class="game-board" id="game-board">
+                        <!-- 棋盘将通过JavaScript生成 -->
+                    </div>
+                    <div class="matrix-bg"></div>
+                </div>
+
+                <div class="control-panel">
+                    <div class="terminal-line">
+                        <span class="prompt">$</span>
+                        <button class="hack-btn undo-btn" id="undo-btn" disabled>
+                            <span class="btn-icon">↶</span>
+                            <span class="btn-text">ROLLBACK</span>
+                        </button>
+                        <button class="hack-btn restart-btn" id="restart-btn">
+                            <span class="btn-icon">⟳</span>
+                            <span class="btn-text">REINITIALIZE</span>
+                        </button>
+                    </div>
+
+                    <div class="terminal-line">
+                        <span class="prompt">$</span>
+                        <span class="command">history:</span>
+                        <span class="output" id="undo-info">MOVES_AVAILABLE: 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="cursor">█</span>
+            </div>
         </div>
     </div>
 

@@ -1,3 +1,5 @@
+/* ===== 黑客终端风格五子棋 ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,75 +7,260 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0f1f 50%, #0a0a0a 100%);
     min-height: 100vh;
     padding: 20px;
+    overflow-x: hidden;
+    position: relative;
 }
 
+/* 终端窗口 */
+.terminal-window {
+    background: #1a1a1a;
+    border-radius: 8px;
+    box-shadow:
+        0 0 50px rgba(0, 255, 0, 0.1),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 2px solid #333;
+    max-width: 900px;
+    margin: 0 auto;
+    animation: terminalGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes terminalGlow {
+    0% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.05), inset 0 0 20px rgba(0, 0, 0, 0.5); }
+    100% { box-shadow: 0 0 60px rgba(0, 255, 0, 0.15), inset 0 0 20px rgba(0, 0, 0, 0.5); }
+}
+
+/* 终端头部 */
+.terminal-header {
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+    border-bottom: 1px solid #333;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px 8px 0 0;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.terminal-btn.close {
+    background: #ff5f57;
+    border: 1px solid #ff3b30;
+}
+
+.terminal-btn.minimize {
+    background: #ffbd2e;
+    border: 1px solid #f9a825;
+}
+
+.terminal-btn.maximize {
+    background: #28ca42;
+    border: 1px solid #21d43a;
+}
+
+.terminal-btn:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px currentColor;
+}
+
+.terminal-title {
+    color: #0f0;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 0 0 5px #0f0;
+    font-family: 'Courier New', monospace;
+}
+
+/* 终端内容 */
+.terminal-content {
+    background: #0d0d0d;
+    padding: 15px;
+    border-radius: 0 0 8px 8px;
+    min-height: 600px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 终端行样式 */
+.terminal-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    color: #0f0;
+    font-size: 14px;
+    animation: typeIn 0.5s ease-out;
+}
+
+@keyframes typeIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.prompt {
+    color: #0f0;
+    margin-right: 10px;
+    font-weight: bold;
+    text-shadow: 0 0 3px #0f0;
+}
+
+.command {
+    color: #ff6b6b;
+    margin-right: 10px;
+}
+
+.output {
+    color: #4ecdc4;
+    font-weight: bold;
+}
+
+.output.status {
+    color: #95e77e;
+}
+
+/* 游戏容器 */
 .container {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+    margin-top: 15px;
+}
+
+/* 游戏标题 */
+.game-title {
     text-align: center;
+    margin-bottom: 25px;
 }
 
-h1 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 2.5em;
+.game-title h1 {
+    font-size: 2.8em;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 5px;
+    animation: glitchText 3s infinite;
+    background: linear-gradient(45deg, #0f0, #ff0, #f0f, #0ff, #f00, #0f0);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease infinite, glitchText 3s infinite;
 }
 
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes glitchText {
+    0%, 100% { text-shadow: 2px 2px 0 #ff00ff, -2px -2px 0 #00ffff; }
+    25% { text-shadow: -2px 2px 0 #ff00ff, 2px -2px 0 #00ffff; }
+    50% { text-shadow: 2px -2px 0 #ff00ff, -2px 2px 0 #00ffff; }
+    75% { text-shadow: -2px -2px 0 #ff00ff, 2px 2px 0 #00ffff; }
+}
+
+.hack-bracket {
+    color: #ff00ff;
+    font-weight: bold;
+    text-shadow: 0 0 5px #ff00ff;
+}
+
+.subtitle {
+    font-size: 0.9em;
+    color: #666;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+/* 游戏信息 */
 .game-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
     padding: 15px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
 }
 
-.current-player {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #2c3e50;
+.info-panel, .status-panel {
+    flex: 1;
 }
 
-.game-status {
-    font-size: 1.1em;
-    color: #27ae60;
-    font-weight: bold;
+/* Matrix 棋盘容器 */
+.matrix-container {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
 }
 
+.matrix-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 70%),
+        linear-gradient(45deg, transparent 48%, rgba(0, 255, 0, 0.05) 49%, rgba(0, 255, 0, 0.05) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(0, 255, 0, 0.05) 49%, rgba(0, 255, 0, 0.05) 51%, transparent 52%);
+    border-radius: 4px;
+    pointer-events: none;
+    animation: matrixScan 8s linear infinite;
+}
+
+@keyframes matrixScan {
+    0% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+    100% { opacity: 0.3; }
+}
+
+/* 游戏棋盘 */
 .game-board {
     display: grid;
     grid-template-columns: repeat(15, 35px);
     grid-template-rows: repeat(15, 35px);
     gap: 0;
-    background-color: #daa520;
+    background: #1a1a1a;
     padding: 10px;
-    border-radius: 8px;
-    border: 3px solid #8b4513;
-    margin: 0 auto 20px;
-    width: fit-content;
+    border-radius: 4px;
+    border: 2px solid #0f0;
+    position: relative;
+    z-index: 2;
+    box-shadow:
+        0 0 20px rgba(0, 255, 0, 0.3),
+        inset 0 0 10px rgba(0, 255, 0, 0.1);
 }
 
 .cell {
     width: 35px;
     height: 35px;
-    border: 1px solid #8b4513;
+    border: 1px solid #333;
     position: relative;
     cursor: pointer;
-    background-color: transparent;
+    background: transparent;
+    transition: all 0.2s ease;
 }
 
 .cell:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 255, 0, 0.1);
+    border-color: #0f0;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
 
 .cell.disabled {
@@ -81,7 +268,9 @@ h1 {
 }
 
 .cell.disabled:hover {
-    background-color: transparent;
+    background: transparent;
+    border-color: #333;
+    box-shadow: none;
 }
 
 .piece {
@@ -92,88 +281,184 @@ h1 {
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    border: 2px solid #333;
+    transition: all 0.3s ease;
 }
 
 .piece.black {
-    background-color: #1a1a1a;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: radial-gradient(circle at 30% 30%, #333, #000);
+    border: 2px solid #0f0;
+    box-shadow:
+        0 0 20px rgba(0, 255, 0, 0.8),
+        inset 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: pieceGlow 2s ease-in-out infinite alternate;
 }
 
 .piece.white {
-    background-color: #ffffff;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    background: radial-gradient(circle at 30% 30%, #fff, #ccc);
+    border: 2px solid #ff00ff;
+    box-shadow:
+        0 0 20px rgba(255, 0, 255, 0.8),
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation: pieceGlowWhite 2s ease-in-out infinite alternate;
 }
 
-.controls {
+@keyframes pieceGlow {
+    0% { box-shadow: 0 0 15px rgba(0, 255, 0, 0.6), inset 0 0 10px rgba(0, 0, 0, 0.5); }
+    100% { box-shadow: 0 0 30px rgba(0, 255, 0, 1), inset 0 0 10px rgba(0, 0, 0, 0.5); }
+}
+
+@keyframes pieceGlowWhite {
+    0% { box-shadow: 0 0 15px rgba(255, 0, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3); }
+    100% { box-shadow: 0 0 30px rgba(255, 0, 255, 1), inset 0 0 10px rgba(255, 255, 255, 0.3); }
+}
+
+/* 控制面板 */
+.control-panel {
     margin-top: 20px;
 }
 
-#undo-btn {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1em;
-    border-radius: 5px;
+.hack-btn {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    color: #0f0;
+    border: 2px solid #0f0;
+    padding: 12px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: 'Fira Code', monospace;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-right: 10px;
+    transition: all 0.3s ease;
+    margin-right: 15px;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
-#undo-btn:hover:not(:disabled) {
-    background-color: #c0392b;
+.hack-btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+    transition: left 0.5s ease;
 }
 
-#undo-btn:disabled {
-    background-color: #bdc3c7;
+.hack-btn:hover:before {
+    left: 100%;
+}
+
+.hack-btn:hover {
+    background: linear-gradient(135deg, #0f0 0%, #0a0 100%);
+    color: #000;
+    border-color: #ff0;
+    box-shadow:
+        0 0 20px rgba(0, 255, 0, 0.8),
+        inset 0 0 10px rgba(0, 255, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.hack-btn:active {
+    transform: translateY(0);
+    box-shadow:
+        0 0 10px rgba(0, 255, 0, 0.5),
+        inset 0 0 5px rgba(0, 255, 0, 0.2);
+}
+
+.hack-btn:disabled {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    color: #666;
+    border-color: #444;
     cursor: not-allowed;
+    box-shadow: none;
 }
 
-#restart-btn {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.hack-btn:disabled:hover {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    color: #666;
+    border-color: #444;
+    box-shadow: none;
+    transform: none;
 }
 
-#restart-btn:hover {
-    background-color: #2980b9;
+.hack-btn:disabled:before {
+    display: none;
 }
 
-#restart-btn:active {
-    transform: scale(0.98);
+.btn-icon {
+    font-size: 1.2em;
 }
 
-.undo-info {
-    margin-top: 10px;
-    font-size: 0.9em;
-    color: #7f8c8d;
+/* 光标动画 */
+.cursor {
+    animation: blink 1s infinite;
+    color: #0f0;
+    font-weight: bold;
+    margin-left: 5px;
 }
 
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* 获胜消息样式 */
 .winner-message {
-    color: #e74c3c;
+    color: #ff0;
     font-size: 1.3em;
     font-weight: bold;
-    animation: pulse 1s infinite;
+    text-shadow: 0 0 10px #ff0;
+    animation: winPulse 0.5s infinite alternate;
 }
 
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
+@keyframes winPulse {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+        text-shadow: 0 0 10px #ff0;
+    }
+    100% {
+        opacity: 0.8;
+        transform: scale(1.1);
+        text-shadow: 0 0 20px #ff0, 0 0 30px #ff00ff;
+    }
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .terminal-window {
+        max-width: 100%;
+    }
+
+    .game-title h1 {
+        font-size: 2em;
+        letter-spacing: 2px;
+    }
+
+    .subtitle {
+        font-size: 0.8em;
+        letter-spacing: 2px;
+    }
+
+    .game-info {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px;
+    }
+
     .game-board {
         grid-template-columns: repeat(15, 25px);
         grid-template-rows: repeat(15, 25px);
-        padding: 5px;
+        padding: 8px;
     }
 
     .cell {
@@ -186,12 +471,63 @@ h1 {
         height: 20px;
     }
 
-    h1 {
-        font-size: 2em;
+    .hack-btn {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        margin-right: 10px;
+        margin-bottom: 10px;
     }
 
-    .game-info {
+    .terminal-line {
+        font-size: 12px;
+    }
+
+    .terminal-header {
+        padding: 10px 12px;
+    }
+
+    .terminal-title {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .terminal-header {
         flex-direction: column;
         gap: 10px;
+        text-align: center;
+    }
+
+    .game-title h1 {
+        font-size: 1.5em;
+        letter-spacing: 1px;
+    }
+
+    .game-board {
+        grid-template-columns: repeat(15, 20px);
+        grid-template-rows: repeat(15, 20px);
+        padding: 5px;
+    }
+
+    .cell {
+        width: 20px;
+        height: 20px;
+    }
+
+    .piece {
+        width: 16px;
+        height: 16px;
+    }
+
+    .hack-btn {
+        padding: 8px 12px;
+        font-size: 0.8em;
+        display: flex;
+        justify-content: center;
+        margin: 5px;
+    }
+
+    .btn-text {
+        display: none;
     }
 }
